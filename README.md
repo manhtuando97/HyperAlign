@@ -36,4 +36,4 @@ starting at the *src* folder, run the command:
 - c: the rate of feature masking in creating two corrupted views in HyperCL
 - t: the number of similar nodes, in the counter-part hypergraph, to construct augmented incidence matrice
 
-For example: python main.py example/data1.txt example/data2.txt 64 0.2 e
+For example: python main.py example/data1.txt example/data2.txt 64 0.2 3
