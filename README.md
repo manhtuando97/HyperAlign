@@ -29,8 +29,11 @@ The source code is in the *src* folder.
 ## How to run the code:
 starting at the *src* folder, run the command:
 
-*python main.py --dataset_1 --dataset 2
-- dataset_2: the file containing the list of hyperedges of the first hypergraph.
-- dataset_2: the file containing the list of hyperedges of the second hypergraph.
+*python main.py --dataset_1 --dataset 2 --f --c --t
+- dataset_2: the directory to the file containing the list of hyperedges of the first hypergraph.
+- dataset_2: the directory to the file containing the list of hyperedges of the second hypergraph.
+- f: the dimension of the node features extracted in HyperFeat
+- c: the rate of feature masking in creating two corrupted views in HyperCL
+- t: the number of similar nodes, in the counter-part hypergraph, to construct augmented incidence matrice
 
-For example: 
+For example: python main.py example/data1.txt example/data2.txt 64 0.2 e
