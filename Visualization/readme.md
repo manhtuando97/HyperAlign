@@ -24,11 +24,11 @@ This folder contains the additional results for the rebuttal. Due to the the spa
  
 - SANA [1]
   
-[1] Peng J, Xiong F, Pan S, et al. Robust Network Alignment with the Combination of Structure and Attribute Embeddings. IEEE International Conference on Data Mining (ICDM) 2023. 
+  [1] Peng J, Xiong F, Pan S, et al. Robust Network Alignment with the Combination of Structure and Attribute Embeddings. IEEE International Conference on Data Mining (ICDM) 2023. 
 
 - Grad-Align+ [2]
   
-[2] Park J D, Tran C, Shin W Y, et al. GradAlign+: Empowering gradual network alignment using attribute augmentation. ACM CIKM 2022.
+  [2] Park J D, Tran C, Shin W Y, et al. GradAlign+: Empowering gradual network alignment using attribute augmentation. ACM CIKM 2022.
 
 - Comparison of **SANA**, **Grad-Align+**, and **HyperAlign**.
   - File 'Configuration_2_baselines.JPG': for **Configuration 2**.
