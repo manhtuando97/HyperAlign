@@ -27,6 +27,7 @@ parser.add_argument('--hidden_size', type=int, default=512)
 parser.add_argument('--epochs', type=int, default=20)
 args = parser.parse_args()
 
+# can be skipped
 if args.use_config:
 	try:
 		import json
