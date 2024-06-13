@@ -130,6 +130,7 @@ def train_wgan_adv_pseudo_self( trans, optimizer_trans, wdiscriminator, optimize
 	models[0].train()
 	models[1].train()
 
+	# train discriminator
 	for j in range(batch_d_per_iter):
 		w0 = wdiscriminator(embd0)
 		w1 = wdiscriminator(embd1)
