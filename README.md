@@ -7,8 +7,7 @@ Extensive experiments on ten real-world datasets demonstrate the significant and
 
 
 ## Datasets
-The datasets are in the *Datasets* folder. 
-We remove any nodes that are incident to fewer than two hypergraphs.
+The datasets are in the *Datasets* zip. 
 
 Source:
 - coauth-Geology: https://www.cs.cornell.edu/~arb/data/coauth-MAG-Geology/
@@ -24,16 +23,22 @@ Source:
 
 
 ## Code
-The source code is in the *src* folder.
+The source code is in the *HyperAlign* folder.
 
 ## How to run the code:
-starting at the *src* folder, run the command:
+starting at the *HyperAlign* folder, store the datasets in the *dataset* folder and run the command:
 
-*python main.py --dataset_1 --dataset 2 --f --c --t
-- dataset_2: the directory to the file containing the list of hyperedges of the first hypergraph.
-- dataset_2: the directory to the file containing the list of hyperedges of the second hypergraph.
-- f: the dimension of the node features extracted in HyperFeat
-- c: the rate of feature masking in creating two corrupted views in HyperCL
-- t: the number of similar nodes, in the counter-part hypergraph, to construct augmented incidence matrice
+*python main.py --dataset1 [NAME1] --dataset2 [NAME2] --input_dimensions [INPUT DIM] --hid_dim [HIDDEN DIM] --t [T] --config [OPTION]
+- [NAME1]: the name of the file containing the list of hyperedges of the first hypergraph.
+- [NAME2]: the name the file containing the list of hyperedges of the second hypergraph.
+- [INPUT DIM]: the dimension of the node features extracted in HyperFeat.
+- [HIDDIM DIM]: dimension of the output node embeddings.
+- [T]: the number of similar nodes, in the counter-part hypergraph, to construct augmented incidence matrice.
+- [OPTION]: choose 0/1/2/3/4 (0 as default)
+-   0: full-fledged HyperAlign
+-   1: HyperAlign-s
+-   2: HyperAlign-WC
+-   3: HyperAlign-WA
+-   4: HyperAlign-WAC
 
-For example: python main.py example/data1.txt example/data2.txt 64 0.2 3
+For example: python main.py --dataset1 email-Enron1 --dataset 2 email-Enron2 --input_dimensions 32 --hid_dim 64 --t 3 --config 2
