@@ -29,7 +29,7 @@ def getCompactDegreeListsVertices(g,incidence_size,vertices,maxDegree,calcUntilL
 
     for v in vertices:
         degreeList[v] = getCompactDegreeLists(g,v,maxDegree,calcUntilLayer)
-        #degreeList_[v] = getCompactDegreeLists_(g,v,incidence_size,maxDegree,calcUntilLayer)
+        
         if incidence_size != None:
             degreeList_[v] = getDegreeLists_(g, v, incidence_size, calcUntilLayer)
 
@@ -42,13 +42,11 @@ def getCompactDegreeLists_(g, root, incidence_size,maxDegree,calcUntilLayer,max_
     listas = {}
     vetor_marcacao = [0] * (max(g) + 1)
 
-    # Marcar s e inserir s na fila Q
     queue = deque()
     queue.append(root)
     vetor_marcacao[root] = 1
     l = {}
     
-    ## Variáveis de controle de distância
     depth = 0
     pendingDepthIncrease = 0
     timeToDepthIncrease = 1
@@ -75,7 +73,6 @@ def getCompactDegreeLists_(g, root, incidence_size,maxDegree,calcUntilLayer,max_
                 list_d.append((degree,freq))
             list_d.sort(key=lambda x: x[0])
 
-            #l_sorted = np.sort(list_d)
 
             lp = {}
             for size in range(2, max_size+1):
@@ -103,13 +100,12 @@ def getCompactDegreeLists(g, root, maxDegree,calcUntilLayer):
     listas = {}
     vetor_marcacao = [0] * (max(g) + 1)
 
-    # Marcar s e inserir s na fila Q
     queue = deque()
     queue.append(root)
     vetor_marcacao[root] = 1
     l = {}
     
-    ## Variáveis de controle de distância
+
     depth = 0
     pendingDepthIncrease = 0
     timeToDepthIncrease = 1
@@ -158,7 +154,6 @@ def getDegreeLists_(g, root, incidence_size, calcUntilLayer, max_size = 10):
     listas = {}
     vetor_marcacao = [0] * (max(g) + 1)
 
-    # Marcar s e inserir s na fila Q
     queue = deque()
     queue.append(root)
     vetor_marcacao[root] = 1
@@ -166,7 +161,6 @@ def getDegreeLists_(g, root, incidence_size, calcUntilLayer, max_size = 10):
 
     l = deque()
     
-    ## Variáveis de controle de distância
     depth = 0
     pendingDepthIncrease = 0
     timeToDepthIncrease = 1
@@ -205,8 +199,6 @@ def getDegreeLists_(g, root, incidence_size, calcUntilLayer, max_size = 10):
 
     t1 = time()
 
-    #print('in getDegreeList listas')
-    #print(listas)
     return listas
 
 def getDegreeLists(g, root, calcUntilLayer):
@@ -215,7 +207,6 @@ def getDegreeLists(g, root, calcUntilLayer):
     listas = {}
     vetor_marcacao = [0] * (max(g) + 1)
 
-    # Marcar s e inserir s na fila Q
     queue = deque()
     queue.append(root)
     vetor_marcacao[root] = 1
@@ -223,7 +214,6 @@ def getDegreeLists(g, root, calcUntilLayer):
 
     l = deque()
     
-    ## Variáveis de controle de distância
     depth = 0
     pendingDepthIncrease = 0
     timeToDepthIncrease = 1
@@ -257,8 +247,6 @@ def getDegreeLists(g, root, calcUntilLayer):
 
     t1 = time()
 
-    #print('in getDegreeList listas')
-    #print(listas)
     return listas
 
 def cost(a,b):
@@ -305,7 +293,6 @@ def preprocess_degreeLists():
             list_d.sort(key=lambda x: x[0])
             dList[v][layer] = np.array(list_d,dtype='float')
 
-    #saveVariableOnDisk(dList,'compactDegreeList')
 
     return dList
 
@@ -323,7 +310,6 @@ def verifyDegrees(degrees,degree_v_root,degree_a,degree_b):
     return degree_now 
 
 def get_vertices(v,degree_v,degrees,a_vertices):
-    #a_vertices_selected = 2 * math.log(a_vertices,2)
     a_vertices_selected =  math.log(a_vertices,2)
     vertices = deque()
 
@@ -381,19 +367,7 @@ def get_vertices(v,degree_v,degrees,a_vertices):
 
 def splitDegreeList(G, degreeList, degrees,compactDegree):
 
-    '''
-    if(compactDegree):
-        #degreeList = restoreVariableFromDisk('compactDegreeList')
-        degreeList = exec_bfs_compact(self.G,self.workers,self.calcUntilLayer)
-    else:
-        #degreeList = restoreVariableFromDisk('degreeList')
-        degreeList = exec_bfs(self.G,self.workers,self.calcUntilLayer)
     
-
-    #degreeList = preprocess_degreeLists()
-    '''
-
-    #degrees = restoreVariableFromDisk('degrees_vector')
 
     degreeListsSelected = {}
     vertices = {}
@@ -408,16 +382,12 @@ def splitDegreeList(G, degreeList, degrees,compactDegree):
         for n in nbs:
             degreeListsSelected[n] = degreeList[n]
 
-    #saveVariableOnDisk(vertices,'split-vertices-'+str(part))
-    #saveVariableOnDisk(degreeListsSelected,'split-degreeList-'+str(part))
     
     return vertices, degreeListsSelected
 
 
 def calc_distances_alternative(vertices, degreeList, max_size = 5, compactDegree = False):
 
-    #vertices = restoreVariableFromDisk('split-vertices-'+str(part))
-    #degreeList = restoreVariableFromDisk('split-degreeList-'+str(part))
 
     distances = {}
     if compactDegree:
@@ -451,13 +421,10 @@ def calc_distances_alternative(vertices, degreeList, max_size = 5, compactDegree
 
 
     preprocess_consolides_distances(distances)
-    #saveVariableOnDisk(distances,'distances-'+str(part))
     return distances
 
 def calc_distances(vertices, degreeList, compactDegree = False):
 
-    #vertices = restoreVariableFromDisk('split-vertices-'+str(part))
-    #degreeList = restoreVariableFromDisk('split-degreeList-'+str(part))
 
     distances = {}
     if compactDegree:
@@ -468,7 +435,6 @@ def calc_distances(vertices, degreeList, compactDegree = False):
     
     for v1,nbs in vertices.items():
         lists_v1 = degreeList[v1]
-        # lists_v1 is a dictionary
 
         for v2 in nbs:
             t00 = time()
@@ -512,20 +478,13 @@ def calc_distances_all(vertices,list_vertices,degreeList,compactDegree = False):
             distances[v1,v2] = {}
 
             for layer in range(0,max_layer):
-                #t0 = time()
-                
-                #dist, path = fastdtw(list(lists_v1[layer][0]),list(lists_v2[layer][0]),radius=1,dist=dist_func)
                 dist, path = fastdtw(lists_v1[layer],lists_v2[layer],radius=1,dist=dist_func)
-                #t1 = time()
                 distances[v1,v2][layer] = dist
                 
 
         cont += 1
 
     preprocess_consolides_distances(distances)
-    #saveVariableOnDisk(distances,'distances-'+str(part))
-    print('calc_distances_all in algorithms_distances.py')
-    print(distances)
     return distances
 
 
@@ -578,23 +537,8 @@ def exec_bfs_compact(G,incidence_size,workers,calcUntilLayer):
         if(len(G[v]) > maxDegree):
             maxDegree = len(G[v])
 
-    '''
-    with ProcessPoolExecutor(max_workers=workers) as executor:
-
-        part = 1
-        for c in chunks:
-            job = executor.submit(getCompactDegreeListsVertices,G,c,maxDegree,calcUntilLayer)
-            futures[job] = part
-            part += 1
-
-        for job in as_completed(futures):
-            dl = job.result()
-            v = futures[job]
-            degreeList.update(dl)
-    '''
     degreeList, degreeList_ = getCompactDegreeListsVertices(G,incidence_size,vertices,maxDegree,calcUntilLayer)
 
-    #saveVariableOnDisk(degreeList,'compactDegreeList')
     t1 = time()
 
 
@@ -608,27 +552,9 @@ def exec_bfs(G,incidence_size,workers,calcUntilLayer):
     t0 = time()
     vertices = G.keys()
     parts = workers
-    #chunks = partition(vertices,parts)
-    '''
-    with ProcessPoolExecutor(max_workers=workers) as executor:
-
-        part = 1
-        for c in chunks:
-            job = executor.submit(getDegreeListsVertices,G,c,calcUntilLayer)
-            futures[job] = part
-            part += 1
-
-        for job in as_completed(futures):
-            dl = job.result()
-            v = futures[job]
-            degreeList.update(dl)
-    '''
-    #print('exec bfs vertices')
-    #print(G)
-    #print(vertices)
+    
     degreeList, degreeList_ = getDegreeListsVertices(G,incidence_size,vertices,calcUntilLayer)
 
-    #saveVariableOnDisk(degreeList,'degreeList')
     t1 = time()
 
 
@@ -638,21 +564,7 @@ def exec_bfs(G,incidence_size,workers,calcUntilLayer):
 def generate_distances_network_part1(vertices, degreeList, distances, workers):
     parts = workers
     weights_distances = {}
-    '''
-    for part in range(1,parts + 1):    
-        
-        distances = restoreVariableFromDisk('distances-'+str(part))
-        
-        for vertices,layers in distances.items():
-            for layer,distance in layers.items():
-                vx = vertices[0]
-                vy = vertices[1]
-                if(layer not in weights_distances):
-                    weights_distances[layer] = {}
-                weights_distances[layer][vx,vy] = distance
-
-    '''
-    #distances = calc_distances(vertices, degreeList)
+    
 
     for vertices,layers in distances.items():
             for layer,distance in layers.items():
@@ -665,7 +577,7 @@ def generate_distances_network_part1(vertices, degreeList, distances, workers):
     weights_distances_layer = dict()
     for layer,values in weights_distances.items():
         weights_distances_layer[layer] = values
-        #saveVariableOnDisk(values,'weights_distances-layer-'+str(layer))
+        
     return weights_distances_layer
 
 def generate_distances_network_part2(vertices, degreeList, workers):
@@ -674,24 +586,6 @@ def generate_distances_network_part2(vertices, degreeList, workers):
 
     distances = calc_distances(vertices, degreeList)
 
-    '''
-    for part in range(1,parts + 1):
-
-        distances = restoreVariableFromDisk('distances-'+str(part))
-
-        for vertices,layers in distances.items():
-            for layer,distance in layers.items():
-                vx = vertices[0]
-                vy = vertices[1]
-                if(layer not in graphs):
-                    graphs[layer] = {}
-                if(vx not in graphs[layer]):
-                   graphs[layer][vx] = [] 
-                if(vy not in graphs[layer]):
-                   graphs[layer][vy] = [] 
-                graphs[layer][vx].append(vy)
-                graphs[layer][vy].append(vx)
-    '''
 
     for vertices,layers in distances.items():
         for layer,distance in layers.items():
@@ -709,7 +603,6 @@ def generate_distances_network_part2(vertices, degreeList, workers):
     layer_graphs = dict()
     for layer,values in graphs.items():
         layer_graphs[layer] = values
-        #saveVariableOnDisk(values,'graphs-layer-'+str(layer))
 
     return layer_graphs
 
@@ -719,14 +612,13 @@ def generate_distances_network_part3(vertices, degreeList, distances):
 
     weights_distances_layer = generate_distances_network_part1(vertices, degreeList, distances, 4)
     layer_graphs = generate_distances_network_part2(vertices, degreeList, 4)
-    #while(isPickle('graphs-layer-'+str(layer))):
     alias_method_j = {}
     alias_method_q = {}
     weights = {}
     for layer in layer_graphs.keys():
-        #graphs = restoreVariableFromDisk('graphs-layer-'+str(layer))
+        
         graphs = layer_graphs[layer]
-        #weights_distances = restoreVariableFromDisk('weights_distances-layer-'+str(layer))
+        
         weights_distances = weights_distances_layer[layer]
 
         alias_method_j[layer] = {}
@@ -753,9 +645,6 @@ def generate_distances_network_part3(vertices, degreeList, distances):
             alias_method_j[layer][v] = J
             alias_method_q[layer][v] = q
 
-        #saveVariableOnDisk(weights,'distances_nets_weights-layer-'+str(layer))
-        #saveVariableOnDisk(alias_method_j,'alias_method_j-layer-'+str(layer))
-        #saveVariableOnDisk(alias_method_q,'alias_method_q-layer-'+str(layer))
         layer += 1
 
     return weights, alias_method_j, alias_method_q, layer_graphs
@@ -764,101 +653,36 @@ def generate_distances_network_part3(vertices, degreeList, distances):
 def generate_distances_network_part4(layer_graphs):
     graphs_c = {}
     layer = 0
-    #while(isPickle('graphs-layer-'+str(layer))):
     for layer in layer_graphs.keys():
         
-        #graphs = restoreVariableFromDisk('graphs-layer-'+str(layer))
         graphs = layer_graphs[layer]
         graphs_c[layer] = graphs
         
-        #layer += 1
 
-
-    #saveVariableOnDisk(graphs_c,'distances_nets_graphs')
     return graphs_c
 
 def generate_distances_network_part5(alias_method_j):
     alias_method_j_c = {}
     layer = 0
-    #while(isPickle('alias_method_j-layer-'+str(layer))):
     for layer in alias_method_j.keys():       
 
-        #alias_method_j = restoreVariableFromDisk('alias_method_j-layer-'+str(layer))
         alias_method_j_c[layer] = alias_method_j[layer]
-        #layer += 1
-    #saveVariableOnDisk(alias_method_j_c,'nets_weights_alias_method_j')
 
     return alias_method_j_c
 
 def generate_distances_network_part6(alias_method_q):
     alias_method_q_c = {}
     layer = 0
-    #while(isPickle('alias_method_q-layer-'+str(layer))):
     for layer in alias_method_q.keys():
         
-        #alias_method_q = restoreVariableFromDisk('alias_method_q-layer-'+str(layer))
         alias_method_q_c[layer] = alias_method_q[layer]
-        #layer += 1
-
-    #saveVariableOnDisk(alias_method_q_c,'nets_weights_alias_method_q')
 
     return alias_method_q_c
 
 def generate_distances_network(vertices, degreeList, distances):
     t0 = time()
     workers = 4
-    '''
-    os.system("rm "+returnPathStruc2vec()+"/../pickles/weights_distances-layer-*.pickle")
-    with ProcessPoolExecutor(max_workers=1) as executor:
-        job = executor.submit(generate_distances_network_part1,workers)
-        job.result()
-    t1 = time()
-    t = t1-t0
-    
-    t0 = time()
-    os.system("rm "+returnPathStruc2vec()+"/../pickles/graphs-layer-*.pickle")
-    with ProcessPoolExecutor(max_workers=1) as executor:
-        job = executor.submit(generate_distances_network_part2,workers)
-        job.result()
-    t1 = time()
-    t = t1-t0
 
-    t0 = time()
-    os.system("rm "+returnPathStruc2vec()+"/../pickles/distances_nets_weights-layer-*.pickle")
-    os.system("rm "+returnPathStruc2vec()+"/../pickles/alias_method_j-layer-*.pickle")
-    os.system("rm "+returnPathStruc2vec()+"/../pickles/alias_method_q-layer-*.pickle")
-
-    
-    with ProcessPoolExecutor(max_workers=1) as executor:
-        job = executor.submit(generate_distances_network_part3)
-        job.result()
-    t1 = time()
-    t = t1-t0
-    
-    
-    t0 = time()
-    with ProcessPoolExecutor(max_workers=1) as executor:
-        job = executor.submit(generate_distances_network_part4)
-        job.result()
-    t1 = time()
-    t = t1-t0
-
-    
-    t0 = time()
-    with ProcessPoolExecutor(max_workers=1) as executor:
-        job = executor.submit(generate_distances_network_part5)
-        job.result()
-    t1 = time()
-    t = t1-t0
-
-    t0 = time()
-    
-    with ProcessPoolExecutor(max_workers=1) as executor:
-        job = executor.submit(generate_distances_network_part6)
-        job.result()
-    '''
-    #generate_distances_network_part1(vertices, degreeList, 4)
-    #layer_graphs = generate_distances_network_part2(vertices, degreeList, 4)
     weights, alias_method_j, alias_method_q, layer_graphs = generate_distances_network_part3(vertices, degreeList, distances)
     graph_c = generate_distances_network_part4(layer_graphs)
     alias_method_j_c = generate_distances_network_part5(alias_method_j)
