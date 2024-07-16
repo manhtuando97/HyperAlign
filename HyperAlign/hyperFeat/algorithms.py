@@ -16,9 +16,7 @@ def generate_parameters_random_walk(weights_, workers):
     amount_edges = {}
     
     layer = 0
-    #while(isPickle('distances_nets_weights-layer-'+str(layer))):
     for layer in weights_.keys():
-        #weights = restoreVariableFromDisk('distances_nets_weights-layer-'+str(layer))
         weights = weights_[layer]
     
         for k,list_weights in weights.items():
@@ -31,21 +29,18 @@ def generate_parameters_random_walk(weights_, workers):
                 sum_weights[layer] += w
                 amount_edges[layer] += 1
         
-        #layer += 1
 
     average_weight = {}
     for layer in sum_weights.keys():
         average_weight[layer] = sum_weights[layer] / amount_edges[layer]
 
-    #saveVariableOnDisk(average_weight,'average_weight')
 
     amount_neighbours = {}
 
     layer = 0
-    #while(isPickle('distances_nets_weights-layer-'+str(layer))):
+
     for layer in weights_.keys():
                 
-        #weights = restoreVariableFromDisk('distances_nets_weights-layer-'+str(layer))
         weights = weights_[layer]
 
         amount_neighbours[layer] = {}
@@ -56,11 +51,6 @@ def generate_parameters_random_walk(weights_, workers):
                 if(w > average_weight[layer]):
                     cont_neighbours += 1
             amount_neighbours[layer][k] = cont_neighbours
-
-        #layer += 1
-
-
-    #saveVariableOnDisk(amount_neighbours,'amount_neighbours')
 
     return amount_neighbours
 
@@ -94,7 +84,7 @@ def exec_random_walk(graphs,alias_method_j,alias_method_q,v,walk_length,amount_n
 
         else:
             r = random.random()
-            #print(amount_neighbours)
+            
             limiar_moveup = prob_moveup(amount_neighbours[layer][v])
             if(r > limiar_moveup):
                 if(layer > initialLayer):
@@ -116,11 +106,6 @@ def exec_ramdom_walks_for_chunck(vertices,graphs,alias_method_j,alias_method_q,w
 
 def generate_random_walks_large_graphs(name, graph_c, alias_method_j, alias_method_q,amount_neighbors,num_walks,walk_length,workers,vertices):
 
-
-    #graphs = restoreVariableFromDisk('distances_nets_graphs')
-    #alias_method_j = restoreVariableFromDisk('nets_weights_alias_method_j')
-    #alias_method_q = restoreVariableFromDisk('nets_weights_alias_method_q')
-    #amount_neighbours = restoreVariableFromDisk('amount_neighbours')
 
     t0 = time()
     
@@ -145,12 +130,6 @@ def generate_random_walks_large_graphs(name, graph_c, alias_method_j, alias_meth
 
 def generate_random_walks(name, graphs,alias_method_j, alias_method_q,amount_neighbours,num_walks,walk_length,workers,vertices):
 
-
-    #graphs = restoreVariableFromDisk('distances_nets_graphs')
-    #alias_method_j = restoreVariableFromDisk('nets_weights_alias_method_j')
-    #alias_method_q = restoreVariableFromDisk('nets_weights_alias_method_q')
-    #amount_neighbours = restoreVariableFromDisk('amount_neighbours')
-
     t0 = time()
     
     walks = deque()
@@ -165,17 +144,12 @@ def generate_random_walks(name, graphs,alias_method_j, alias_method_q,amount_nei
             random.shuffle(vertices)
             job = executor.submit(exec_ramdom_walks_for_chunck,vertices,graphs,alias_method_j,alias_method_q,walk_length,amount_neighbours)
             futures[job] = walk_iter
-            #part += 1
+            
         for job in as_completed(futures):
             walk = job.result()
             r = futures[job]
             walks.extend(walk)
             del futures[job]
-    '''
-    for walk_iter in range(num_walks):
-        random.shuffle(vertices)
-        exec_ramdom_walks_for_chunck(vertices,graphs,alias_method_j,alias_method_q,walk_length,amount_neighbors)
-    '''
 
     t1 = time()
     
