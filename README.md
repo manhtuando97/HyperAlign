@@ -37,7 +37,7 @@ The source code is in the *HyperAlign* folder.
 ## How to run the code:
 starting at the *HyperAlign* folder, store the datasets in the *dataset* folder and run the command:
 
-*python main.py --dataset1 [NAME1] --dataset2 [NAME2] --input_dimensions [INPUT DIM] --hid_dim [HIDDEN DIM] --t [T] --config [OPTION]
+python main.py --dataset1 [NAME1] --dataset2 [NAME2] --input_dimensions [INPUT DIM] --hid_dim [HIDDEN DIM] --t [T] --config [OPTION]
 - [NAME1]: the name of the file containing the list of hyperedges of the first hypergraph.
 - [NAME2]: the name the file containing the list of hyperedges of the second hypergraph.
 - [INPUT DIM]: the dimension of the node features extracted in HyperFeat.
