@@ -27,25 +27,11 @@ class Graph():
 
 
 	def preprocess_neighbors_with_bfs(self):
-		'''
-		with ProcessPoolExecutor(max_workers=self.workers) as executor:
-			job = executor.submit(exec_bfs,self.G,self.workers,self.calcUntilLayer)
-			
-			job.result()
-		'''
-		#print('preprocess neighbors bfs')
-		#print(self.G)
+	
 		degreeList, degreeList_ = exec_bfs(self.G,self.incidence_size,self.workers,self.calcUntilLayer)
 		return degreeList, degreeList_
 
 	def preprocess_neighbors_with_bfs_compact(self):
-		
-		'''
-		with ProcessPoolExecutor(max_workers=self.workers) as executor:
-			job = executor.submit(exec_bfs_compact,self.G,self.workers,self.calcUntilLayer)
-			
-			job.result()
-		'''
 		
 		degreeList, degreeList_ = exec_bfs_compact(self.G,self.incidence_size,self.workers,self.calcUntilLayer)
 		return degreeList, degreeList_
@@ -81,7 +67,6 @@ class Graph():
 			if(index < (l - 1)):
 				degrees[degree]['after'] = degrees_sorted[index + 1]
 		
-		#saveVariableOnDisk(degrees,'degrees_vector')
 		return degrees
 
 
@@ -97,37 +82,14 @@ class Graph():
 
 		degrees = self.create_vectors()
 		vertices_, degreeList = splitDegreeList(G,degreeList,degrees,compactDegree)
-		#print('degree list')
-		#print(degreeList)
+		
 		vertices = list(reversed(sorted(self.G.keys())))
-		'''
-		if(compactDegree):
-		    degreeList = restoreVariableFromDisk('compactDegreeList')
-		else:
-		    degreeList = restoreVariableFromDisk('degreeList')
-		'''
 
 		parts = self.workers
 		chunks = partition(vertices,parts)
 
 		t0 = time()
 
-		'''
-		with ProcessPoolExecutor(max_workers = self.workers) as executor:
-
-			part = 1
-			for c in chunks:
-				list_v = []
-				for v in c:
-					list_v.append([vd for vd in degreeList.keys() if vd > v])
-				job = executor.submit(calc_distances_all, c, list_v, degreeList,part, compactDegree = compactDegree)
-				futures[job] = part
-				part += 1
-
-			for job in as_completed(futures):
-				job.result()
-				r = futures[job]
-		'''
 		list_v = []
 		for v in vertices:
 			list_v.append([vd for vd in degreeList.keys() if vd > v])
@@ -165,31 +127,6 @@ class Graph():
 		G = self.G
 		vertices = G.keys()
 		
-		'''
-		parts = self.workers
-		chunks = partition(vertices,parts)
-		
-		with ProcessPoolExecutor(max_workers = 1) as executor:
-
-			part = 1
-			for c in chunks:
-				job = executor.submit(splitDegreeList,part,c,G,compactDegree)
-				job.result()
-				part += 1
-
-		
-		with ProcessPoolExecutor(max_workers = self.workers) as executor:
-
-			part = 1
-			for c in chunks:
-				job = executor.submit(calc_distances, part, compactDegree = compactDegree)
-				futures[job] = part
-				part += 1
-
-			for job in as_completed(futures):
-				job.result()
-				r = futures[job]
-		'''
 
 		degrees = self.create_vectors()
 
@@ -217,24 +154,12 @@ class Graph():
 
 	def create_distances_network(self, vertices_, degreeList, distances):
 		
-		'''
-		with ProcessPoolExecutor(max_workers=1) as executor:
-			job = executor.submit(generate_distances_network,self.workers)
-
-			job.result()
-		'''
 		
 		weights, alias_method_j, alias_method_q, graph_c, alias_method_j_c, alias_method_q_c = generate_distances_network(vertices_, degreeList, distances)
 
 		return weights, alias_method_j, alias_method_q, graph_c, alias_method_j_c, alias_method_q_c
 
 	def preprocess_parameters_random_walk(self, weights, alias_method_j, alias_method_q):
-		'''
-		with ProcessPoolExecutor(max_workers=1) as executor:
-			job = executor.submit(generate_parameters_random_walk,self.workers)
-
-			job.result()
-		'''
 
 		amount_neighbors = generate_parameters_random_walk(weights, self.workers)
 		return amount_neighbors
@@ -244,23 +169,10 @@ class Graph():
 
 		# for large graphs, it is serially executed, because of memory use.
 		if(len(self.G) > 500000):
-			'''
-			with ProcessPoolExecutor(max_workers=1) as executor:
-				job = executor.submit(generate_random_walks_large_graphs,num_walks,walk_length,self.workers,self.G.keys())
-				#job = executor.submit(generate_random_walks_large_graphs,num_walks,walk_length,self.workers, list(self.G.keys()))
 
-				job.result()
-			'''
 			generate_random_walks_large_graphs(name, graph_c, alias_method_j, alias_method_q, amount_neighbors,num_walks,walk_length,self.workers,self.G.keys())
 
 		else:
-			'''
-			with ProcessPoolExecutor(max_workers=1) as executor:
-				#job = executor.submit(generate_random_walks,num_walks,walk_length,self.workers,self.G.keys())
-				job = executor.submit(generate_random_walks,num_walks,walk_length,self.workers, list(self.G.keys()))
-				#print(self.G.keys())
-				job.result()
-			'''
 			generate_random_walks(name, graph_c, alias_method_j, alias_method_q, amount_neighbors,num_walks,walk_length,self.workers, list(self.G.keys()))
 
 		return	
