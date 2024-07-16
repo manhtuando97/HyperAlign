@@ -21,7 +21,16 @@ Source:
 - threads-ask-ubuntu: https://www.cs.cornell.edu/~arb/data/threads-ask-ubuntu/
 - threads-math: https://www.cs.cornell.edu/~arb/data/threads-math-sx/
 
-
+## Requirements:
+- Pytorch > 1.4
+- torch-geometric
+- torch-scatter
+- futures
+- fastdtw
+- gensim
+- numpy
+- scipy
+  
 ## Code
 The source code is in the *HyperAlign* folder.
 
