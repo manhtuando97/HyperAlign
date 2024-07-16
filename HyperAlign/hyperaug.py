@@ -143,8 +143,6 @@ def train_dis(trans, optimizer_trans, discriminator, optimizer_d, model, dataset
     return loss
 
 
-# train_feature_recon(trans, optimizer_trans, model, dataset1, dataset2, [recon_model0, recon_model1], [optimizer_recon0, optimizer_recon1])
-
 # train reconstruction functions
 def train_feature_recon(trans, optimizer_trans, model, dataset1, dataset2, recon_models, optimizer_recons, augmentation, batch_r_per_iter=10):
 	
@@ -210,7 +208,7 @@ def topo_augment(hyperedge_index1, num_edges1, ori_Dn1, hyperedge_index2, num_ed
     row_sums2 = sim2.abs().sum(dim=1, keepdim=True)
     norm_sim2 = sim2 / row_sums2
 
-    # augmentation for first dataset, use sim2, you also need to return updated node degree and weight to multiple with n2e and e2n
+    
     count1 = num_edges1
     augment_node1 = []
     augment_edge1 = []
@@ -228,8 +226,7 @@ def topo_augment(hyperedge_index1, num_edges1, ori_Dn1, hyperedge_index2, num_ed
             eweights1.append(t * norm_sim2[node_id][c_node])
             Dn1[c_node] += norm_sim2[node_id][c_node]
 
-    # to-do: create a vector to update the weights of n2e and e2n reflecting the augmentation weights
-    # each will be length number of incidence relationships (sum of hyperedge cardinalities)
+    
     augment_hyperedge_index1 = torch.tensor([augment_node1, augment_edge1])
     updated_hyperedge_index1 = torch.cat((hyperedge_index1, augment_hyperedge_index1), dim=1)
     weights_ori1 = torch.ones(Dn1.shape[0] + hyperedge_index1.shape[1])
@@ -239,7 +236,7 @@ def topo_augment(hyperedge_index1, num_edges1, ori_Dn1, hyperedge_index2, num_ed
     updated_eweights1 = torch.cat((weights_ori1, eweights1))
     Dn1 = Dn1 + ori_Dn1
 
-    # augmentation for second dataset, use sim1
+    
     count2 = num_edges2
     augment_node2 = []
     augment_edge2 = []
