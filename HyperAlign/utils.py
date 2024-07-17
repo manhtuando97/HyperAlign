@@ -90,3 +90,16 @@ def feature_reconstruct_loss(embd, x, recon_model):
 	recon_x = recon_model(embd)
 	return torch.norm(recon_x - x, dim=1, p=2).mean()
 
+# predict alignment based on node having the most similar embedding
+def prediction(args, n_embd1, n_embd2, node_list1, node_list2):
+    norm_1 = torch.nn.functional.normalize(n_embd1, dim=1, p=2)
+    norm_2 = torch.nn.functional.normalize(n_embd2, dim=1, p=2)
+
+    cossim = torch.mm(norm_1, norm_2.transpose(0,1))
+	
+    _, top_idx1 = torch.topk(cossim, 1, dim=1)
+
+    h = open('{}/{}-{}.txt'.format(args.pred_output, args.dataset1, args.dataset2), 'w')
+    for n1 in node_list1:
+        h.write('{} {}\n'.format(str(n1), str((top_idx1[n1].item()))))
+    h.close()
