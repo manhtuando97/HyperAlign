@@ -50,8 +50,8 @@ python main.py --dataset1 [NAME1] --dataset2 [NAME2] --input_dimensions [INPUT D
    > 3: HyperAlign-WA,
    > 4: HyperAlign-WAC
 - [PRED] whether to save alignment prediction (by choosing the node having the most similar embedding) in the prediction output folder.
-  > 0: not saved,
-  > 1: saved
+  > 0: to not save,
+  > 1: to save
 
 For example: python main.py --dataset1 email-Enron1 --dataset2 email-Enron2 --input_dimensions 32 --hid_dim 64 --t 3 --pred 1
 
