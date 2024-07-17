@@ -50,6 +50,6 @@ python main.py --dataset1 [NAME1] --dataset2 [NAME2] --input_dimensions [INPUT D
    > 3: HyperAlign-WA,
    > 4: HyperAlign-WAC
 
-For example: python main.py --dataset1 email-Enron1 --dataset 2 email-Enron2 --input_dimensions 32 --hid_dim 64 --t 3 --config 2
+For example: python main.py --dataset1 email-Enron1 --dataset2 email-Enron2 --input_dimensions 32 --hid_dim 64 --t 3 --config 2
 
 The output will be stored in folder *output*.
