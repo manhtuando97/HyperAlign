@@ -55,4 +55,4 @@ python main.py --dataset1 [NAME1] --dataset2 [NAME2] --input_dimensions [INPUT D
 
 For example: python main.py --dataset1 email-Enron1 --dataset2 email-Enron2 --input_dimensions 32 --hid_dim 64 --t 3 --pred 1
 
-The output node embeddings will be stored in folder *output*, and the prediction will be stored in folder *prediction*.
+The output node embeddings will be stored in folder *embeddings*, and the prediction will be stored in folder *prediction*.
