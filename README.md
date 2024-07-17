@@ -37,7 +37,7 @@ The source code is in the *HyperAlign* folder.
 ## How to run the code:
 starting at the *HyperAlign* folder, store the datasets in the *dataset* folder and run the command:
 
-python main.py --dataset1 [NAME1] --dataset2 [NAME2] --input_dimensions [INPUT DIM] --hid_dim [HIDDEN DIM] --t [T] --config [OPTION]
+python main.py --dataset1 [NAME1] --dataset2 [NAME2] --input_dimensions [INPUT DIM] --hid_dim [HIDDEN DIM] --t [T] --config [OPTION] --pred [PRED]
 - [NAME1]: the name of the file containing the list of hyperedges of the first hypergraph.
 - [NAME2]: the name the file containing the list of hyperedges of the second hypergraph.
 - [INPUT DIM]: the dimension of the node features extracted in HyperFeat.
@@ -49,7 +49,10 @@ python main.py --dataset1 [NAME1] --dataset2 [NAME2] --input_dimensions [INPUT D
    > 2: HyperAlign-WC,
    > 3: HyperAlign-WA,
    > 4: HyperAlign-WAC
+- [PRED] whether to save alignment prediction (by choosing the node having the most similar embedding) in the prediction output folder.
+  > 0: not saved,
+  > 1: saved
 
-For example: python main.py --dataset1 email-Enron1 --dataset2 email-Enron2 --input_dimensions 32 --hid_dim 64 --t 3
+For example: python main.py --dataset1 email-Enron1 --dataset2 email-Enron2 --input_dimensions 32 --hid_dim 64 --t 3 --pred 1
 
-The output will be stored in folder *output*.
+The output node embeddings will be stored in folder *output*, and the prediction will be stored in folder *prediction*.
