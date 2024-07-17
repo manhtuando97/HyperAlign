@@ -38,8 +38,7 @@ if __name__ == '__main__':
 	parser.add_argument('--config', type=int, default=0, help='0: full-fledged, 1: Hyper-S, 2: Hyper-WC, 3: Hyper-WA, 4: Hyper-WAC')
 	parser.add_argument('--input', nargs='?', default='dataset', help='Input directory')
 	parser.add_argument('--output', nargs='?', default='output', help='Output directory')
-	parser.add_argument('--pred_output', nargs='?', default='prediction', help='Directory storing alignment prediction')
-	parser.add_argument('--pred', type=int, default=0, help='1: save alignment prediction in prediction output direction, 0: not save')
+	
 
 	
 	# for hyperfeat
@@ -74,6 +73,10 @@ if __name__ == '__main__':
 	parser.add_argument('--alpha', type=float, default=0.01)
 	parser.add_argument('--episode', type=int, default=10)
 	parser.add_argument('--t', type=int, default=3)
+
+	# for final step
+	parser.add_argument('--pred_output', nargs='?', default='prediction', help='Directory storing alignment prediction')
+	parser.add_argument('--pred', type=int, default=0, help='1: save alignment prediction in prediction output direction, 0: not save')
 
 	args = parser.parse_args()
 	
