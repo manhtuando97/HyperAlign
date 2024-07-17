@@ -37,7 +37,7 @@ if __name__ == '__main__':
 	parser.add_argument('--dataset2', type=str, default='contact-high-school2')
 	parser.add_argument('--config', type=int, default=0, help='0: full-fledged, 1: Hyper-S, 2: Hyper-WC, 3: Hyper-WA, 4: Hyper-WAC')
 	parser.add_argument('--input', nargs='?', default='dataset', help='Input directory')
-	parser.add_argument('--output', nargs='?', default='output', help='Output directory')
+	parser.add_argument('--output', nargs='?', default='embeddings', help='Output directory storing node embeddings')
 	
 
 	
