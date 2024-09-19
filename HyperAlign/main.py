@@ -49,7 +49,7 @@ if __name__ == '__main__':
 	parser.add_argument('--walk_length', type=int, default=50, help='Length of walk per source. Default is 80.')
 	parser.add_argument('--num_walks', type=int, default=10, help='Number of walks per source. Default is 10.')
 	parser.add_argument('--window_size', type=int, default=10, help='Context size for optimization. Default is 10.')
-	parser.add_argument('--iter', default=5, type=int, help='Number of epochs in SGD')
+	parser.add_argument('--iter', default=20, type=int, help='Number of epochs in SGD')
 	parser.add_argument('--OPT1', default=True, type=bool, help='optimization in constructing level graphs')
 	
 
@@ -59,7 +59,7 @@ if __name__ == '__main__':
 	parser.add_argument('--num_layers', type=int, default=2)
 	parser.add_argument('--lr', type=float, default=5.0e-04)
 	parser.add_argument('--weight_decay', type=float, default=1.0e-05)
-	parser.add_argument('--epochs', type=int, default=10)
+	parser.add_argument('--epochs', type=int, default=100)
 	parser.add_argument('--drop_feature_rate', type=float, default=0.2)
 	parser.add_argument('--drop_incidence_rate', type=float, default=0.2)
 	parser.add_argument('--tau_n', type=float, default=0.5)
@@ -71,7 +71,7 @@ if __name__ == '__main__':
 	parser.add_argument('--lr_wd', type=float, default=0.01)
 	parser.add_argument('--lr_recon', type=float, default=0.01)
 	parser.add_argument('--alpha', type=float, default=0.01)
-	parser.add_argument('--episode', type=int, default=10)
+	parser.add_argument('--episode', type=int, default=30)
 	parser.add_argument('--t', type=int, default=3)
 
 	# for final step
