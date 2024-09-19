@@ -55,6 +55,6 @@ python main.py --dataset1 [NAME1] --dataset2 [NAME2] --iter [ITER] --input_dimen
   > 0: to not save,
   > 1: to save
 
-For example: python main.py --dataset1 email-Enron1 --dataset2 email-Enron2 --iter 30 --input_dimensions 32 --hid_dim 64 --epochs 200 --episode 30 --t 3 --pred 1
+For example: python main.py --dataset1 email-Enron1 --dataset2 email-Enron2 --iter 30 --input_dimensions 32 --hid_dim 64 --epochs 20 --episode 30 --t 3 --pred 1
 
 The output node embeddings will be stored in folder *embeddings*, and the prediction will be stored in folder *prediction*.
