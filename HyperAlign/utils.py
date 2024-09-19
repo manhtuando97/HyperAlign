@@ -95,7 +95,7 @@ def prediction(args, n_embd1, n_embd2, node_list1, node_list2):
     norm_1 = torch.nn.functional.normalize(n_embd1, dim=1, p=2)
     norm_2 = torch.nn.functional.normalize(n_embd2, dim=1, p=2)
 
-    cossim = torch.mm(norm_1, norm_2.transpose(0,1))
+    cossim = torch.mm(norm_2, norm_1.transpose(0,1))
 	
     _, top_idx1 = torch.topk(cossim, 1, dim=1)
 
