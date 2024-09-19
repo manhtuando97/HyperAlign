@@ -59,7 +59,7 @@ if __name__ == '__main__':
 	parser.add_argument('--num_layers', type=int, default=2)
 	parser.add_argument('--lr', type=float, default=5.0e-04)
 	parser.add_argument('--weight_decay', type=float, default=1.0e-05)
-	parser.add_argument('--epochs', type=int, default=100)
+	parser.add_argument('--epochs', type=int, default=30)
 	parser.add_argument('--drop_feature_rate', type=float, default=0.2)
 	parser.add_argument('--drop_incidence_rate', type=float, default=0.2)
 	parser.add_argument('--tau_n', type=float, default=0.5)
@@ -71,7 +71,7 @@ if __name__ == '__main__':
 	parser.add_argument('--lr_wd', type=float, default=0.01)
 	parser.add_argument('--lr_recon', type=float, default=0.01)
 	parser.add_argument('--alpha', type=float, default=0.01)
-	parser.add_argument('--episode', type=int, default=30)
+	parser.add_argument('--episode', type=int, default=20)
 	parser.add_argument('--t', type=int, default=3)
 
 	# for final step
