@@ -49,7 +49,7 @@ if __name__ == '__main__':
 	parser.add_argument('--walk_length', type=int, default=50, help='Length of walk per source. Default is 80.')
 	parser.add_argument('--num_walks', type=int, default=10, help='Number of walks per source. Default is 10.')
 	parser.add_argument('--window_size', type=int, default=10, help='Context size for optimization. Default is 10.')
-	parser.add_argument('--iter', default=20, type=int, help='Number of epochs in SGD')
+	parser.add_argument('--iter', default=30, type=int, help='Number of epochs in SGD')
 	parser.add_argument('--OPT1', default=True, type=bool, help='optimization in constructing level graphs')
 	
 
