@@ -39,7 +39,7 @@ starting at the *HyperAlign* folder, store the datasets in the *dataset* folder 
 python main.py --dataset1 [NAME1] --dataset2 [NAME2] --iter [ITER] --input_dimensions [INPUT DIM] --hid_dim [HIDDEN DIM] --epochs [EPOCHS] --episode [EPISODE] --t [T] --config [OPTION] --pred [PRED]
 - [NAME1]: the name of the file containing the list of hyperedges of the first hypergraph.
 - [NAME2]: the name the file containing the list of hyperedges of the second hypergraph.
-  [ITER]: the number of SGD iterations in language model.
+- [ITER]: the number of SGD iterations in language model.
 - [INPUT DIM]: the dimension of the node features extracted in HyperFeat.
 - [HIDDIM DIM]: dimension of the output node embeddings.
 - [EPOCHS]: the number of epochs in contrastive learning
