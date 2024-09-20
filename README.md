@@ -24,8 +24,7 @@ Source:
 - threads-math: https://www.cs.cornell.edu/~arb/data/threads-math-sx/
 
 ## Requirements:
-- Pytorch > 1.4
-- torch-geometric
+- Pytorch
 - futures
 - fastdtw
 - gensim
