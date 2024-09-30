@@ -1,20 +1,19 @@
-# -*- coding: utf-8 -*-
 from time import time
 import logging,inspect
 import pickle
 from itertools import islice
 import os.path
 
-#dir_f = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+
 dir_f = ''
-#folder_pickles = dir_f+ "/pickles/"
+
 folder_pickles = "pickles/"
 
 def returnPathhf2vec():
     return dir_f
 
 def isPickle(fname):
-    #return os.path.isfile(dir_f+'/../pickles/'+fname+'.pickle')
+
     return os.path.isfile('pickles/'+fname+'.pickle')
 
 def chunks(data, SIZE=10000):
@@ -24,7 +23,7 @@ def chunks(data, SIZE=10000):
 
 def partition(lst, n):
     division = len(lst) / float(n)
-    #print(type(lst))
+
     lst = list(lst)
     return [ lst[int(round(division * i)): int(round(division * (i + 1)))] for i in range(n) ]
 
@@ -37,16 +36,25 @@ def restoreVariableFromDisk(name):
 
     return val
 
+def satinary_check(args, n_embd1, n_embd2):
+    n_nodes = min(n_embd1.shape[0], n_embd2.shape[0])
+    n_v = max(n_embd1.shape[0], n_embd2.shape[0])
+
+    import math
+    if args.epd > n_nodes:
+        args.epd = math.floor(0.5 * n_nodes * n_nodes / n_v)
+    elif math.floor(0.5 * n_nodes) > args.epd:
+        args.epd = math.floor(math.sqrt(0.1) * n_nodes)
+    else:
+        args.epd = math.floor(math.sqrt(0.2) * n_nodes)
+
+    return n_embd1, (n_embd2, args.epd)
+
 def saveVariableOnDisk(f,name):
     t0 = time()
-    #print(folder_pickles)
+
     with open(folder_pickles + name + '.pickle', 'wb') as handle:
         pickle.dump(f, handle, protocol=pickle.HIGHEST_PROTOCOL)
     t1 = time()
 
     return
-
-
-
-
-
