@@ -109,7 +109,7 @@ def feature_reconstruct_loss(embd, x, recon_model):
         return torch.norm(recon_x - x, dim=1, p=2).mean()
 
 # predict alignment based on node having the most similar embedding
-def prediction(args, n_embd1, n_embd2, node_list1, node_list2, k = 1):
+def prediction_(args, n_embd1, n_embd2, node_list1, node_list2, k = 1):
     norm_1 = torch.nn.functional.normalize(n_embd1, dim=1, p=2)
     norm_2 = torch.nn.functional.normalize(n_embd2, dim=1, p=2)
     #norm_1 = n_embd1
