@@ -1,4 +1,7 @@
 # Unsupervised Alignment of Hypergraphs with Different Scales
+
+**We are aware that the provided code, which is a best-restored version, has reproducibility issues. We are working on either reproducing the results or issuing a Corrigendum.**
+
 Source code for the paper **Unsupervised Alignment of Hypergraphs with Different Scales**, where we formulate and address the problem of finding node correspondences across two hypergraphs, potentially with different scales, in an unsupervised manner.
 To address the unique challenges of the problem, we propose **HyperAlign** (<ins><strong>Hyper</strong></ins>graph <ins><strong>Align</strong></ins>ment).
 **HyperAlign** utilizes the hypergraph topology to extract node features (**HyperFeat**), conducts contrastive learning as an auxiliary alignment task (**HyperCL**), and employs Generative Adversarial Networks (GAN) to align the two respective node embedding spaces of the two hypergraphs. During the course of training GAN, **HyperAlign** augments each hypergraph with the "soft virtual hyperedges" from the counterpart hypergraph (**HyperAug**)) to resolve the scale disparity and share information across the two hypergraphs.
